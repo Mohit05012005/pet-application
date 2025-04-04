@@ -16,19 +16,18 @@ const { log } = require('console');
 
 
 // database connection .....
-mongoose.connect('mongodb://localhost:27017/mypets').then((err)=>{
-    console.log("connected to database.");
+mongoose.connect(process.env.MONGODB_KEY)
+.then(()=>{
+  console.log("connection is successfull to database!");
 })
-.catch((err)=>{
-  console.log("error in connection with database!")
-})
+
 
 
 let port = process.env.PORT || 9000;
 
 // server connection and running .....
 const server = app.listen(port,()=>{      // it will return a server object.
-    console.log("server is running at :","http://localhost:9000/");
+    console.log("server is running at :",`${port}/`);
 })
 
 

@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     },
     email:{
          type: String,
-         unique: true,
          validate:[Validator.isEmail,'email should be correct!']
     },
     role:{
