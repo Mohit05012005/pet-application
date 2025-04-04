@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: hsl(212, 74%, 30%);
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px hsla(0, 0%, 100%, 0.461);
+            transition: box-shadow 0.3s;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .container:hover {
+            box-shadow: 0 0 20px hsla(0, 0%, 100%, 0.8); /* Increased shadow on hover */
+        }
+
+        h4 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+
+        #name {
+            margin-bottom: 10px;
+        }
+
+        #number {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .dashboard-item {
+            padding: 20px;
+            margin-bottom: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            transition: transform 0.3s;
+            cursor: pointer; /* Add cursor pointer to indicate clickability */
+        }
+
+        .dashboard-item:hover {
+            transform: translateY(-5px); /* Move item up on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4 id="name"></h4>
+        <h4 id="number"></h4>
+        <button id="additem">ADD PET</button>
+
+        <div class="dashboard-item" id="list1"> <!-- Corrected IDs -->
+            <h4>Pet 1</h4>
+            <p>Details about Pet 1</p>
+        </div>
+
+        <div class="dashboard-item" id="list2"> <!-- Corrected IDs -->
+            <h4>Pet 2</h4>
+            <p>Details about Pet 2</p>
+        </div>
+    </div>
+
+    <script>
+        const name = localStorage.getItem("username");
+        document.getElementById("name").textContent = "Hello " + name;
+        const number = localStorage.getItem("usernumber") || "";
+        document.getElementById("number").textContent = "+91 " + number;
+
+        document.getElementById("additem").addEventListener("click", () => {
+            window.open("addpost.html", "_blank");
+        });
+
+        // Add event listeners to each dashboard item
+        document.getElementById("list1").addEventListener("click", () => {
+            window.open("showpetdetails.html", "_blank");
+        });
+
+        document.getElementById("list2").addEventListener("click", () => {
+            window.open("showpetdetails.html", "_blank");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Pet</title>
+    <style>
+body {
+    background-image: url(background.webp);
+    background-size: cover; /* Adjusts the background image to cover the entire container */
+    background-position: center; /* Centers the background image */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: calc(100% - 22px); /* Subtracting the padding and border width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-upload {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+    display: inline-block;
+    width: 100%; /* Ensure the button takes the full width */
+    border: none; /* Remove border */
+}
+
+.file-upload:hover {
+    background-color: #45a049;
+}
+
+.file-upload input[type="file"] {
+    display: none; /* Hide the actual file input element */
+}
+
+button {
+    width: 100%;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="name">Pet Name</label>
+            <input type="text" id="name" placeholder="Pet Name" required>
+        </div>
+        <div class="form-group">
+            <label for="breed">Pet Breed</label>
+            <input type="text" id="breed" placeholder="Pet Breed" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Pet Age</label>
+            <input type="number" id="age" placeholder="Pet Age" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Pet Description</label>
+            <textarea id="description" placeholder="Pet Description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Pet Image</label>
+            <input type="file" id="image" accept="image/*" capture="camera" required>
+        </div>
+        <button type="button" id="submit">Post Pet</button>
+    </div>
+
+    <script>
+        document.getElementById("submit").addEventListener("click", () => {
+            const name = document.getElementById("name").value;
+            const breed = document.getElementById("breed").value;
+            const age = document.getElementById("age").value;
+            const description = document.getElementById("description").value;
+            const image = document.getElementById("image").files[0]; // Get the file data
+
+            // Check if an image is selected
+            const imageUrl = image ? URL.createObjectURL(image) : '';
+
+            // Create a FileReader to read the image file
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageData = event.target.result; // Base64-encoded image data
+                const petData = {
+                    name: name,
+                    breed: breed,
+                    age: age,
+                    description: description,
+                    image: imageUrl // Store the image URL
+                };
+
+                // Retrieve existing pet data or initialize to an empty array
+                const existingPets = JSON.parse(localStorage.getItem("pets")) || [];
+                existingPets.push(petData); // Add the new pet data
+                localStorage.setItem("pets", JSON.stringify(existingPets));
+
+                window.open("showpetdetails.html","_blank");
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(image);
+        });
+    </script>
+</body>
+</html>

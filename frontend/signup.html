@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Authentication</title>
+  <style>
+    .container {
+      width: 300px;
+      margin: 20px auto;
+      text-align: center;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 150px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"], /* Changed input type to "tel" */
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sign Up</h1>
+    <form id="signupForm" action="/api/users/signup" method="post">
+      <input name="name" type="text" id="signupname" placeholder="Username" required>
+      <input name="email" type="email" id="signupEmail" placeholder="Email" required>
+      <input name="password" type="password" id="signupPassword" placeholder="Password" required>
+      <input name="confirmPassword" type="tel" id="signupnumber" placeholder="Conform password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+
+  <!-- <script>
+    // Sign Up Form
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      var email = document.getElementById("signupEmail").value;
+      var password = document.getElementById("signupPassword").value;
+      var userName = document.getElementById("signupname").value; // Fixed typo in id
+      var mobileNumber = document.getElementById("signupnumber").value;
+
+      // Basic validation for mobile number
+      if (!(/^\d{10}$/.test(mobileNumber))) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+      }
+
+      // Store user credentials in localStorage
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPassword", password);
+      localStorage.setItem("username", userName);
+      localStorage.setItem("usernumber", mobileNumber);
+
+      // Redirect to login page after signup
+      window.location.href = "login.html";
+    });
+  </script> -->
+  <script src="signup.js"></script>
+</body>
+</html>

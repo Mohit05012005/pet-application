@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:whitesmoke;
+    color: 
+    #BEB7A4;
+    padding: 10px 20px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+   padding-left:22px;
+    text-decoration: none;
+    color: 
+    #BEB7A4;
+   font-size: 23px;
+        font-family: "Jersey 20", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      
+      
+      
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+.hero {
+    margin-top: 12px;
+    background-image: url('deepak.jpeg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 522px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+@media screen and (max-width: 600px){
+    .hero{
+        width: 100%;
+       height: 190px;
+     
+    }
+    .hero-content #ii{
+font-size: 36px;
+margin-top:3vh;
+margin-left: -10vh;
+
+    }
+    .hero-content #pp{
+        font-size: 12px;
+        margin-left: px ;
+    }
+    .box #mm{
+        margin-top: 5px;
+        width: 100%;
+        height: 30vh;
+       
+    }
+    body .truck{
+        width: 100%;
+        height: 30vh;
+        margin-top: 22px;
+    }
+     .truck #ll{
+       height: 20vh;
+       margin-bottom: 2vh;
+    }
+    .truck #bb{
+        margin-top: -27vh;
+        margin-left: 15vh;
+    }
+    .footer{
+        width: 100%;
+    }
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+}
+
+#ii{
+    font-size: 118px;
+    margin-bottom: 20px;
+    color: #F3D0D7;
+    margin-top:-72px ;
+    margin-right:-168px ;
+font-family: "Abril Fatface", serif;
+font-weight: 400;
+font-style: normal;
+
+}
+#pp{
+   margin-top: 44px;
+    color: #DAC0A3;
+    font-size: 29px;
+   
+    margin-left: -259px;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+          
+}
+.food{
+    height: 8vh;
+   margin-left: 52vw;
+   margin-top: 12vh;
+}
+#kk{
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 15px;
+    font-size: 40px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 400px;
+    flex-wrap: wrap;
+}
+.box {
+    width: 100px;
+    height: 100px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  
+}
+#mm{
+   height: 51vh;
+   width: 22vw;
+   border-radius: 12px;
+  
+   transition: all ease 0.7s;
+   cursor: pointer;
+   object-fit: cover;
+}
+#mm:hover{
+    width: 50vw;
+    height:60vh;
+   
+}
+
+.truck{
+    height: 73vh;
+    width: 100vw;
+    background-color:#B1DDF1
+}
+#ll{
+    height: 78vh;
+}
+#bb{
+    height: 30vh;
+    margin-bottom: 296px;
+    margin-left: 21px;
+    display: inline;
+
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relat;
+    bottom: 0;
+    width: 100%;
+}
+.footer p {
+    margin: 0;
+}

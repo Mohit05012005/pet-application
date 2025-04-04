@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>email validation </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <form id = "myform">
+                <label for="text">Enter your email address:</label>
+                <input name="email" placeholder="like example@gmail.com" id="text" type="text">
+                <button type="submit">Validate</button>
+                <p id="display"></p>
+            </form>
+        </div>
+        <script>
+            const form = document.querySelector('#myform');
+          function  isvalid(email){
+               const regx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              return regx.test(email);
+          }
+                  form.addEventListener('submit',(event)=>{
+                       event.preventDefault();
+                       const email = document.querySelector('input').value;
+                       const display = document.querySelector('#display');
+                       if(isvalid(email)){
+                            display.innerText = "your email address is valid"
+                       }else{
+                        display.innerText = "your email address is invalid"
+                       }
+                  })
+        </script>
+      
+    </body>
+</html>
