@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 // exception handling ...
-process.on('uncaughtException',(err)=>{
-    console.log("Uncaught Exception occured. Shutting down.......");
-    process.exit(1);
-});
+// process.on('uncaughtException',(err)=>{
+//     console.log("Uncaught Exception occured. Shutting down.......");
+//     process.exit(1);
+// });
 
 const dotenv = require('dotenv');
 const path = require('path');
