@@ -9,9 +9,9 @@ authRouters.route('/signup')
 .delete(userController.protect,userController.deletedData);
 
 authRouters.route('/login')
-.post(userController.log_in);
+.post(userController.logIn);
 
-authRouters.route('/:id')
+authRouters.route('/:id')    // why this??
 .delete(userController.protect,userController.deleteDataById);
 
 authRouters.route('/forget-password')

@@ -25,5 +25,5 @@ app.all('*',function(req,resp,next){  // * means everything
 
 app.use(errorController);
 
- console.log("here in app");
+//  console.log("here in app");
 module.exports = app;

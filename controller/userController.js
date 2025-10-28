@@ -34,7 +34,7 @@ exports.signUp = asyncErrorHandler(async(req,resp)=>{
     });
 
 
-    exports.log_in = asyncErrorHandler(async(req,resp,next)=>{
+    exports.logIn = asyncErrorHandler(async(req,resp,next)=>{
           const {email,password} = req.body;
            if(!email || !password){
              const err = new customError("please enter both email and password!",400);
@@ -109,7 +109,7 @@ exports.protect = asyncErrorHandler(async(req,resp,next)=>{
         }
 
         //5. for using it into restrict route.
-         req.user = user;  
+         req.user = user;    //??
          console.log(req.user);    
      next();
 })
@@ -134,7 +134,7 @@ exports.forgetPassword = asyncErrorHandler(async(req,resp)=>{
          // 2.generate random reset token  .....note) this should not be a jwt token
          const resetToken = user.createRandomToken();
         //  console.log(resetToken);
-        await user.save({validateBeforeSave: false})
+        await user.save({validateBeforeSave: false})    // why this ??
         //3. send token back to the user mail
         const resetUrl = `${req.protocol}://${req.get('host')}/pets/user/resetPassword/${resetToken}`;
         const message = `we have receive the password reset request,please click on the given link to reset your password \n\n ${resetUrl}\n\n This reset password link will be valid only for 10 minutes.`;

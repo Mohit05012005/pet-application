@@ -20,6 +20,9 @@ mongoose.connect(process.env.MONGODB_KEY)
 .then(()=>{
   console.log("connection is successfull to database!");
 })
+.catch((err)=>{
+  console.log("error occured while connecting to the database",err);
+})
 
 
 
