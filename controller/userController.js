@@ -1,6 +1,7 @@
 const usermodel = require('../models/userschema');
 const customError = require('../utils/customError');
 const bcrypt = require('bcrypt');
+const pet_model= require('../models/petschema');
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
 const sendEmail = require('../utils/email');
 const util = require('util');   // util library // for accessing promisify funcition in validate route.
@@ -209,3 +210,13 @@ exports.getMe = asyncErrorHandler(async(req,resp,next)=>{
     data: req.user
   });
 })
+
+
+exports.getPetsByMail = asyncErrorHandler(async(req,resp,next)=>{
+      const user = req.user;
+      const pets = await pet_model.find({mailAddress:user.email});
+      resp.status(200).json({
+        status:"success",
+        data:pets
+      })
+});

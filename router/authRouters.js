@@ -16,6 +16,9 @@ authRouters.route('/me')
 authRouters.route('/:id')    // why this??
 .delete(userController.protect,userController.deleteDataById);
 
+authRouters.route('/mail')
+.get(userController.protect,userController.getPetsByMail);
+
 authRouters.route('/forget-password')
 .post(userController.protect,userController.forgetPassword);
 
