@@ -83,36 +83,53 @@ exports.deletedData = asyncErrorHandler(async(req,resp)=>{
    
 })
 
-exports.protect = asyncErrorHandler(async(req,resp,next)=>{
-     let testToken  = req.headers.authorization;
-     let token;
-     //1. read the token and check it is exist or not.
-     if(testToken && testToken.startsWith('Bearer')){
-        token =   testToken.split(' ')[1];
-     }
-     if(!token){      // bearer can be neglected. it is my choice!
-        return next(new customError('Log in your profile to access!',401));  // to call global error handling middleware.
-     }
-     //2. validate the token
-         const decodeToken = await util.promisify(jwt.verify)(token,process.env.SECRET_STR); // in decodedtoken there will be that user name id 
-         //3. if the user exist or not
-         const user  =  await usermodel.findById(decodeToken.id);
-         if(!user){
-          return next(new customError('The user with the given token does not exit!',401));
-         }
+exports.protect = asyncErrorHandler(async (req, resp, next) => {
+  let testToken = req.headers.authorization;
+  let token;
 
-            //4. if the user change password after token was issued.
-         const answer = await user.isPasswordChange(decodeToken.iat); // calling instance method .......(we can apply on the given instance by the moongose)
-        if(answer){
-            const err = new customError('The user with the given token does not exit!',401);
-            return next(err)
-        }
+  // 1️⃣ Check if the token exists in headers
+  if (testToken && testToken.startsWith("Bearer")) {
+    token = testToken.split(" ")[1];
+  }
 
-        //5. for using it into restrict route.
-         req.user = user;    //??
-         console.log(req.user);    
-     next();
-})
+  if (!token) {
+    return next(new customError("Log in your profile to access!", 401));
+  }
+
+  // 2️⃣ Verify and decode token
+  const decodeToken = await util.promisify(jwt.verify)(
+    token,
+    process.env.SECRET_STR
+  );
+
+  // 3️⃣ Check if the user for that token still exists
+  const user = await usermodel.findById(decodeToken.id);
+  if (!user) {
+    return next(
+      new customError("The user with the given token does not exist!", 401)
+    );
+  }
+
+  // 4️⃣ Check if the user changed their password after token was issued
+  const changedAfter = await user.isPasswordChange(decodeToken.iat);
+  if (changedAfter) {
+    return next(
+      new customError(
+        "User recently changed password. Please log in again!",
+        401
+      )
+    );
+  }
+
+  // 5️⃣ Attach the user to the request (super important!)
+  req.user = user;
+
+  // Optional: useful for debugging
+  console.log("✅ Authenticated user:", req.user.email);
+
+  next();
+});
+
 
 exports.restrict = (role)=>{
     return asyncErrorHandler(async(req,resp,next)=>{
@@ -182,4 +199,13 @@ exports.resetPassword = asyncErrorHandler(async(req,resp,next)=>{
      status: "success",
      token: loginToken
    })
+})
+
+exports.getMe = asyncErrorHandler(async(req,resp,next)=>{
+      // req.user is set by protect middleware
+      console.log(req.user);
+  resp.status(200).json({
+    status: "success",
+    data: req.user
+  });
 })

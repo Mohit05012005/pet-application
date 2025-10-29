@@ -7,22 +7,30 @@ const asyncErrorHandler = require('./../utils/asyncErrorHandler');
 // console.log(kee.isOperational);
 
 
-exports.allpetdata = asyncErrorHandler(async(req,resp,next)=>{
-        const features = new apifeatures(pet_model.find(),req.query).filter().sort().limitFields().pagination();
-          let realq = await features.query;
-          if(!realq){
-            const err = new customError('this Id document is not found!',404);
-           
-             return next(err);
-           }
+exports.allpetdata = asyncErrorHandler(async (req, res, next) => {
+  // Apply filtering, sorting, field limiting, and pagination
+  const features = new apifeatures(pet_model.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .pagination();
 
-       resp.status(200).json({
-        status: "success",
-        data: {
-              realq
-        }
-       }) 
-})
+  // Execute query
+  const pets = await features.query;
+
+  // If no pets found
+  if (!pets || pets.length === 0) {
+    return next(new customError("No pets found!", 404));
+  }
+
+  // Send successful response
+  res.status(200).json({
+    status: "success",
+    results: pets.length,
+    data: pets,
+  });
+});
+
 
 exports.createonepet = asyncErrorHandler(async(req,resp)=>{
         const data = req.body;

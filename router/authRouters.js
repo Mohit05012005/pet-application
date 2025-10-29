@@ -11,6 +11,8 @@ authRouters.route('/signup')
 authRouters.route('/login')
 .post(userController.logIn);
 
+authRouters.route('/me')
+.get(userController.protect,userController.getMe);
 authRouters.route('/:id')    // why this??
 .delete(userController.protect,userController.deleteDataById);
 

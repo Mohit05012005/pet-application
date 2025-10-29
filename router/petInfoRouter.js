@@ -13,7 +13,7 @@ petRouter.route('/loginform')
 
 petRouter.route('/')
 .post(petInfoController.createonepet)
-.get(userController.protect,petInfoController.allpetdata)
+.get(petInfoController.allpetdata)
 // .get(userController.protect,petInfoController.allpetdata)
 
 
