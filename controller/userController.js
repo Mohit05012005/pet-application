@@ -222,28 +222,20 @@ exports.getPetsByMail = asyncErrorHandler(async(req,resp,next)=>{
 });
 
 
-  exports.googleCallBack = asyncErrorHandler(async (req, res, next) => {
-  // Step 1: The user object is automatically attached by Passport after success
-  // const user = req.user;
+exports.googleCallBack = asyncErrorHandler(async (req, res, next) => {
+  if (!req.user) {
+    return res.status(400).json({ message: "Google login failed" });
+  }
 
-  // if (!user) {
-  //   return res.status(400).json({ message: "Google login failed" });
-  // }
-    const {name,email,googleId} = req.body;
-    const existingUser = await usermodel.findOne({email:email});
-    if(!existingUser){
-        existingUser =  await usermodel.create({
-            name:name,
-            email:email,
-            googleId:googleId
-          })
-    }
-    const userId = existingUser._id;
-  // Step 2: Generate JWT
-  const token = signToken(userId);
-  // Step 3: Redirect user to frontend with token
+  const { name, email, googleId, _id } = req.user;
+
+  // Generate JWT token for the authenticated user
+  const token = signToken(_id);
+
+  // Redirect to frontend with token
   res.redirect(`http://localhost:5173/login/success?token=${token}`);
 });
+
 exports.googleSignIn = asyncErrorHandler(async(req,resp,next)=>{
   passport.authenticate('google', { scope: ['profile', 'email'] })
 })
