@@ -13,6 +13,7 @@ authRouters.route('/login')
 
 authRouters.route('/me')
 .get(userController.protect,userController.getMe);
+
 authRouters.route('/:id')    // why this??
 .delete(userController.protect,userController.deleteDataById);
 
