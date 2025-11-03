@@ -125,8 +125,8 @@ exports.protect = asyncErrorHandler(async (req, resp, next) => {
   // 5️⃣ Attach the user to the request (super important!)
   req.user = user;
 
-  // Optional: useful for debugging
-  console.log("✅ Authenticated user:", req.user.email);
+  // // Optional: useful for debugging
+  // console.log("✅ Authenticated user:", req.user.email);
 
   next();
 });
@@ -220,3 +220,30 @@ exports.getPetsByMail = asyncErrorHandler(async(req,resp,next)=>{
         data:pets
       })
 });
+
+
+  exports.googleCallBack = asyncErrorHandler(async (req, res, next) => {
+  // Step 1: The user object is automatically attached by Passport after success
+  // const user = req.user;
+
+  // if (!user) {
+  //   return res.status(400).json({ message: "Google login failed" });
+  // }
+    const {name,email,googleId} = req.body;
+    const existingUser = await usermodel.findOne({email:email});
+    if(!existingUser){
+        existingUser =  await usermodel.create({
+            name:name,
+            email:email,
+            googleId:googleId
+          })
+    }
+    const userId = existingUser._id;
+  // Step 2: Generate JWT
+  const token = signToken(userId);
+  // Step 3: Redirect user to frontend with token
+  res.redirect(`http://localhost:5173/login/success?token=${token}`);
+});
+exports.googleSignIn = asyncErrorHandler(async(req,resp,next)=>{
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+})

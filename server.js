@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 // exception handling ...
-process.on('uncaughtException',(err)=>{
-    console.log("Uncaught Exception occured. Shutting down.......");
-    process.exit(1);
-});
+// process.on('uncaughtException',(err)=>{
+//     console.log("Uncaught Exception occured. Shutting down.......");
+//     process.exit(1);
+// });
 
 const dotenv = require('dotenv');
 const path = require('path');
@@ -12,7 +12,6 @@ const app = require('./app')
 // console.log(path.dirname);
 dotenv.config({path: "./config.env"});
 
-const { log } = require('console');
 
 
 // database connection .....

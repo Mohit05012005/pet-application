@@ -1,7 +1,8 @@
 const express = require('express');
 const userController = require('./../controller/userController');
 const authRouters = express.Router();       // here we have created a new resource router.
-
+const passport = require('passport');              // ✅ import passport package itself
+require('../config/passport');                     // ✅ load Google Strategy setup
 // user signup,
 authRouters.route('/signup')
 .get(userController.protect,userController.getdata)
@@ -16,6 +17,9 @@ authRouters.route('/me')
 authRouters.route('/:id')    // why this??
 .delete(userController.protect,userController.deleteDataById);
 
+authRouters.route('/delete-all-users')
+.delete(userController.deletedData);
+
 authRouters.route('/mail')
 .get(userController.protect,userController.getPetsByMail);
 
@@ -25,6 +29,16 @@ authRouters.route('/forget-password')
 authRouters.route('/reset-Password/:token')
 .patch(userController.protect,userController.resetPassword);
 
+authRouters.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
+// Step 2: Handle Google Callback (after successful login)
+authRouters.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  userController.googleCallBack
+);
 
 module.exports = authRouters;

@@ -2,7 +2,8 @@ const apifeatures = require('./../utils/apifeatures');
 const pet_model = require('./../models/petschema');
 const customError = require('./../utils/customError');
 const asyncErrorHandler = require('./../utils/asyncErrorHandler');
- 
+ const user_model = require('./../models/userschema');
+ const sendEmail = require('./../utils/email');
 //  const kee = new customError("hii",400)
 // console.log(kee.isOperational);
 
@@ -106,3 +107,41 @@ exports.mylimit = async(req,resp)=>{
  })
 
 }
+
+exports.requestpet = asyncErrorHandler(async(req,resp,next)=>{
+   const senderuser = req.user;
+   const userId = req.params.id;
+   console.log(userId);
+           const pet =  await pet_model.findById(userId);
+           if(!pet){
+            return  resp.status(404).json({
+               status:"fail",
+               message:"pet not found"
+            })
+           }
+           const user = await user_model.findOne({email:pet.mailAddress})
+
+           if(!user){
+           return   resp.status(404).json({
+               status:"fail",
+               message:"user not found"
+            })
+           }
+
+         sendEmail({
+            email:user.email,
+            subject:"Pet Request",
+            text:`Hello ${user.name},\n
+            ${senderuser.name} has requested a pet from you.\n
+            Please get in touch with them to proceed further. \n
+            Contact details:\n
+            Email:${senderuser.email}\n
+            Phone:${senderuser.phone}\n
+            Thank you!\n
+            `
+         })
+         resp.status(200).json({
+            status:"success",
+            message:"Request email sent successfully"
+         })
+})

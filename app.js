@@ -6,10 +6,12 @@ const userUpdateRouter = require('./router/userUpdateRouter');
 const cors = require('cors');
 const errorController = require('./controller/errorController');
 const customError = require('./utils/customError');
-
+const passport = require("passport");
+require("./config/passport"); // ✅ This only *runs* your strategy setup code
 // middleware use
 app.use(cors());
 app.use(express.json());//  // used to get the data in request object.
+app.use(passport.initialize());
 app.use('/auth',authRouters);  // where it is 
 app.use('/pets', petRouter);
 app.use('/auth',userUpdateRouter);

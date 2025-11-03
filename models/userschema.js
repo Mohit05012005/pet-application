@@ -20,14 +20,14 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-        required: [true,'password is required field!'],
+        required: [false,'password is required field!'],
         minlength: 8,
         select: false
        
     },
     confirmpassword:{
         type: String,
-        required: [true,'confirm password is required field!'],
+        required: [false,'confirm password is required field!'],
         minlength: 8,
         validate: {
             validator: function(val){
@@ -38,7 +38,11 @@ const userSchema = new mongoose.Schema({
     },
     passwordChangedAt: Date,
     passwordResetToken: String,
-    passwordResetTokenExpired: Date
+    passwordResetTokenExpired: Date,
+    googleId:{
+        type: String,
+        required: [false,'googleId is required for google sign in!']
+    }
 });
 
 userSchema.index({ email: 1 }, { unique: true });
