@@ -8,6 +8,7 @@ class customerror extends Error{
         this.status = this.statusCode>=400 && this.statusCode<500?'fail':'error';
         this.isOperational = true;
         Error.captureStackTrace(this,this.constructor);     // this represents current object and this.constructor represents custom error class.
+       // used to get where the error occured.
     }
 }
 module.exports = customerror;
