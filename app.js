@@ -25,7 +25,7 @@ app.all('*',function(req,resp,next){  // * means everything
     next(err);
 })
 
-app.use(errorController);
+app.use(errorController);  // if any middleware throws error it will be handled by this errorController.
 
 //  console.log("here in app");
 module.exports = app;

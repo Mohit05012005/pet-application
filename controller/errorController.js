@@ -45,7 +45,7 @@ const handleJWTError = (error)=>{
     return new customError('Invalid Token.Please Log In again!',401);
 }
 
-module.exports = (err,req,resp,next)=>{         // global error handling middleware .for handling route errors.
+module.exports = (err,req,resp,next)=>{         // controle the error for only application level.
     //   console.log(err);
     err.statusCode = err.statusCode || 400;
     err.status = err.status || 'error';
