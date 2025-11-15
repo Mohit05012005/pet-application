@@ -2,7 +2,7 @@ const express = require('express');
 const userController = require('./../controller/userController');
 const authRouters = express.Router();       // here we have created a new resource router.
 const passport = require('passport');              // ✅ import passport package itself
-require('../config/passport');                     // ✅ load Google Strategy setup
+require('./../utils/passport');                     // ✅ load Google Strategy setup
 // user signup,
 authRouters.route('/signup')
 .get(userController.protect,userController.getdata)

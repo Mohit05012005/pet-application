@@ -7,10 +7,11 @@ process.on('uncaughtException',(err)=>{
 });
 
 const dotenv = require('dotenv');
+dotenv.config({path: "./config.env"});
 const path = require('path');
 const app = require('./app')
 // console.log(path.dirname);
-dotenv.config({path: "./config.env"});
+
 
 
 
