@@ -3,12 +3,12 @@ const petRouter =  express.Router();          // it return a middleware.
 const userController = require('./../controller/userController');
 // route handler function....
 const petInfoController = require('./../controller/petInfoController');
-
+const upload = require('./../utils/multer');
 petRouter.route('/loginform')
 .get(petInfoController.mylimit)
 
 petRouter.route('/')
-.post(petInfoController.createonepet)
+.post(upload.single("PetImg"),petInfoController.createonepet)
 .get(petInfoController.allpetdata)
 // .get(userController.protect,petInfoController.allpetdata)
 

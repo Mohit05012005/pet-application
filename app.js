@@ -11,6 +11,7 @@ require("./config/passport"); // ✅ This only *runs* your strategy setup code
 // middleware use
 app.use(cors());
 app.use(express.json());//  // used to get the data in request object.
+app.use("/uploads", express.static("uploads"));
 app.use(passport.initialize());
 app.use('/auth',authRouters);  // where it is 
 app.use('/pets', petRouter);

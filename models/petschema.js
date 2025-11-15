@@ -1,54 +1,51 @@
 const mongoose = require('mongoose');
 
-const petSchema = mongoose.Schema({
-    PetName : {
+const petSchema = new mongoose.Schema({
+    PetName: {
         type: String,
-        required : [true,"pet name is required field"],
+        required: [true, "Pet name is required"],
         trim: true
     },
-    OwnerName:{
+    OwnerName: {
         type: String,
-        required: [true,"owner's name is required field."],
-        trim: true,
-        unique: [true,"owner's name should be unique."]
+        required: [true, "Owner name is required"],
+        trim: true
     },
     Species: {
         type: String,
-        required: [true,"owner's name is required field."],
-        trim: true  
+        required: [true, "Species is required"],
+        trim: true
     },
     PetAge: {
         type: Number,
-        required : true
+        required: true
     },
     Licence: {
         type: String,
         required: false
     },
-    PetImg : {
-        type : String,
-        required: [true,"image of pet is required field"]
+    PetImg: {
+        type: String,
+        required: [true, "Pet image is required"]
     },
     Address: {
         type: String,
-        required : true
+        required: true
     },
     PhoneNumber: {
         type: Number,
-        required : true,
-        unique: true
+        required: true
     },
-    mailAddress : {
+    mailAddress: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     petDescription: {
         type: String,
         required: true
     }
-})
+});
 
-const pet_model = mongoose.model('pets_new',petSchema);
+const pet_model = mongoose.model('pets_new', petSchema);
 
 module.exports = pet_model;
