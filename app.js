@@ -18,7 +18,12 @@ app.use('/pets', petRouter);
 app.use('/auth',userUpdateRouter);
 
 
-
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        status:"success",
+        message:"server is up and running!"
+    })
+})
 
 
 app.all('*',function(req,resp,next){  // * means everything
