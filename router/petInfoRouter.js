@@ -8,7 +8,7 @@ petRouter.route('/loginform')
 .get(petInfoController.mylimit)
 
 petRouter.route('/')
-.post(upload.single("PetImg"),petInfoController.createonepet)
+.post(userController.protect,upload.single("PetImg"),petInfoController.createonepet)
 .get(petInfoController.allpetdata)
 // .get(userController.protect,petInfoController.allpetdata)
 

@@ -34,8 +34,12 @@ exports.allpetdata = asyncErrorHandler(async (req, res, next) => {
 
 
 exports.createonepet = asyncErrorHandler(async(req,resp)=>{
-        const data = req.body;
+        let data = req.body;
+        data.mailAddress = req.user.email;
+        data.OwnerName = req.user.name;
         data.PetImg = `uploads/${req.file.filename}`;
+        data.PetAge = Number(data.PetAge);
+        data.PhoneNumber = Number(data.PhoneNumber);
         const createpet = await pet_model.create(data);
            resp.status(201).json({
               status: 'success',

@@ -46,7 +46,7 @@ const handleJWTError = (error)=>{
 }
 
 module.exports = (err,req,resp,next)=>{         // controle the error for only application level.
-    //   console.log(err);
+    console.log(err);
     err.statusCode = err.statusCode || 400;
     err.status = err.status || 'error';
     if(process.env.NODE_ENV === 'development'){
