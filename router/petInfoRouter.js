@@ -18,6 +18,6 @@ petRouter.route('/request/:id')
 petRouter.route('/:id')
 .get(petInfoController.getonepet)
 .patch(petInfoController.updateonepet)
-.delete(userController.protect,userController.restrict('admin'),petInfoController.deleteonepet) // 
+.delete(userController.protect,petInfoController.deleteonepet) // 
 
 module.exports = petRouter;
