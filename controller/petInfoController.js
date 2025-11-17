@@ -115,7 +115,6 @@ exports.mylimit = async(req,resp)=>{
 exports.requestpet = asyncErrorHandler(async(req,resp,next)=>{
    const senderuser = req.user;
    const userId = req.params.id;
-   console.log(userId);
            const pet =  await pet_model.findById(userId);
            if(!pet){
             return  resp.status(404).json({
