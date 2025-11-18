@@ -15,7 +15,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(passport.initialize());
 app.use('/auth',authRouters);  // where it is 
 app.use('/pets', petRouter);
-app.use('/auth',userUpdateRouter);
+app.use('/user',userUpdateRouter);
 
 
 app.get('/',(req,res)=>{

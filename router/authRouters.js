@@ -3,6 +3,20 @@ const userController = require('./../controller/userController');
 const authRouters = express.Router();       // here we have created a new resource router.
 const passport = require('passport');              // ✅ import passport package itself
 require('./../utils/passport');                     // ✅ load Google Strategy setup
+
+// Step 1: Authenticate with Google
+authRouters.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// Step 2: Handle Google Callback (after successful login)
+authRouters.get(
+  "/google/callback",
+  passport.authenticate("google",{failureRedirect:"/login"}),
+  userController.googleCallBack
+);
+
 // user signup,
 authRouters.route('/signup')
 .get(userController.protect,userController.getdata)
@@ -29,16 +43,6 @@ authRouters.route('/forget-password')
 authRouters.route('/reset-Password/:token')
 .patch(userController.protect,userController.resetPassword);
 
-authRouters.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
 
-// Step 2: Handle Google Callback (after successful login)
-authRouters.get(
-  "/google/callback",
-  passport.authenticate("google",{failureRedirect:"/login"}),
-  userController.googleCallBack
-);
 
 module.exports = authRouters;
