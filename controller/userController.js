@@ -233,9 +233,5 @@ exports.googleCallBack = asyncErrorHandler(async (req, res, next) => {
   const token = signToken(_id);
 
   // Redirect to frontend with token
-  res.redirect(`http://localhost:5173/login/success?token=${token}`);
+  res.redirect(`https://petconnect-y601.onrender.com/login/success?token=${token}`);
 });
-
-exports.googleSignIn = asyncErrorHandler(async(req,resp,next)=>{
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-})

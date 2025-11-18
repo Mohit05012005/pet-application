@@ -37,7 +37,7 @@ authRouters.get(
 // Step 2: Handle Google Callback (after successful login)
 authRouters.get(
   "/google/callback",
-  passport.authenticate("google", { session: false }),
+  passport.authenticate("google",{failureRedirect:"/login"}),
   userController.googleCallBack
 );
 
