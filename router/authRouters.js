@@ -13,7 +13,7 @@ authRouters.get(
 // Step 2: Handle Google Callback (after successful login)
 authRouters.get(
   "/google/callback",
-  passport.authenticate("google",{failureRedirect:"/login"}),
+  passport.authenticate("google",{failureRedirect:"/"}),
   userController.googleCallBack
 );
 

@@ -231,7 +231,7 @@ exports.googleCallBack = asyncErrorHandler(async (req, res, next) => {
 
   // Generate JWT token for the authenticated user
   const token = signToken(_id);
-
+     
   // Redirect to frontend with token
   res.redirect(`https://petconnect-y601.onrender.com/login/success?token=${token}`);
 });

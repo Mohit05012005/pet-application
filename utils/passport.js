@@ -21,5 +21,5 @@ passport.use(new GoogleStrategy({
   }
 }));
 
-passport.serializeUser((user, done) => done(null, user.id));   // serializeUser(user, done): called when you want Passport to save user identification into the session. You decide what to store; typically user.id. done(null, id) stores the id in session.
-passport.deserializeUser((id, done) => User.findById(id, done));// deserializeUser(id, done): called on every request that has a session. Passport retrieves the stored id from session and calls this function to fetch the full user from DB. Result is attached to req.user.
+// passport.serializeUser((user, done) => done(null, user.id));   // serializeUser(user, done): called when you want Passport to save user identification into the session. You decide what to store; typically user.id. done(null, id) stores the id in session.
+// passport.deserializeUser((id, done) => User.findById(id, done));// deserializeUser(id, done): called on every request that has a session. Passport retrieves the stored id from session and calls this function to fetch the full user from DB. Result is attached to req.user.
