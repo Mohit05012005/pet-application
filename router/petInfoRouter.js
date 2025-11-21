@@ -15,6 +15,10 @@ petRouter.route('/')
 petRouter.route('/request/:id')
 .post(userController.protect,petInfoController.requestpet);
 
+petRouter.route('/manypets')
+.post(petInfoController.manypets);
+
+
 petRouter.route('/:id')
 .get(petInfoController.getonepet)
 .patch(petInfoController.updateonepet)

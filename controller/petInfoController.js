@@ -148,3 +148,15 @@ exports.requestpet = asyncErrorHandler(async(req,resp,next)=>{
             message:"Request email sent successfully"
          })
 })
+
+exports.manypets = asyncErrorHandler(async(req,resp,next)=>{
+   const data = req.body;
+   console.log(data);
+   for(let i = 0;i<data.length;i++){
+      await pet_model.create(data[i]);
+   }
+   resp.status(201).json({
+      status:"success",
+      messsage: "all the pet are inserted"
+   })
+})
